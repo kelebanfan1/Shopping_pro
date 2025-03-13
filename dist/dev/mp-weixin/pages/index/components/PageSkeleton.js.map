@@ -1,1 +1,0 @@
-{"version":3,"file":"PageSkeleton.js","sources":["../../../../../../uniComponent:/RTovdW5pYXBwLXByby9oZWltYS1zaG9wL3NyYy9wYWdlcy9pbmRleC9jb21wb25lbnRzL1BhZ2VTa2VsZXRvbi52dWU"],"sourcesContent":["import Component from 'E:/uniapp-pro/heima-shop/src/pages/index/components/PageSkeleton.vue'\nwx.createComponent(Component)"],"names":[],"mappings":";;;;;;;AACA,GAAG,gBAAgB,SAAS;"}
