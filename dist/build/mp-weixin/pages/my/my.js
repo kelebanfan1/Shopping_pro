@@ -1,0 +1,1 @@
+"use strict";const e=require("../../common/vendor.js");require("../../stores/index.js");const r=require("../../stores/modules/member.js"),o=e.defineComponent({__name:"my",setup(o){const n=r.useMemberStore();return(r,o)=>({a:e.t(e.unref(n).profile),b:e.o((r=>e.unref(n).setProfile({nickname:"黑马先锋"}))),c:e.o((r=>e.unref(n).clearProfile()))})}});wx.createPage(o);
