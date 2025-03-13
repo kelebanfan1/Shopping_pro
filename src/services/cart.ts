@@ -31,3 +31,18 @@ export const deleteMemberCartAPI = (data: { ids: string[] }) => {
     data,
   })
 }
+/* 修改商品数量接口
+  skuid :skuid
+  selected:选中状态
+  count:商品数量
+*/
+export const putMemberCartSkuIdAPI = (
+  skuId: string,
+  data: { selected?: boolean; count?: number },
+) => {
+  return http({
+    method: 'PUT',
+    url: `/member/cart/${skuId}`,
+    data,
+  })
+}
