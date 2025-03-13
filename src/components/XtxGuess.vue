@@ -33,6 +33,7 @@ const getHomeGoodsGuessLikeData = async () => {
     finish.value = true
   }
 }
+/* 提交测试 */
 //下拉刷新 随机刷新页码数 0~34
 const resetData = () => {
   const randomInt = Math.floor(Math.random() * 35)
