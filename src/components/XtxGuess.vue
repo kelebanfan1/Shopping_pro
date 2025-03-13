@@ -35,6 +35,7 @@ const getHomeGoodsGuessLikeData = async () => {
 }
 /* 提交测试 */
 /* 提交测试2 */
+/* 提交测试3 */
 //下拉刷新 随机刷新页码数 0~34
 const resetData = () => {
   const randomInt = Math.floor(Math.random() * 35)
