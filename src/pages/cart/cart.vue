@@ -1,11 +1,15 @@
 <script setup lang="ts">
 import type { InputNumberBoxEvent } from '@/components/vk-data-input-number-box/vk-data-input-number-box'
-import { deleteMemberCartAPI, getMemberCartAPI, putMemberCartSkuIdAPI } from '@/services/cart'
+import {
+  deleteMemberCartAPI,
+  getMemberCartAPI,
+  putMemberCartSelectedAPI,
+  putMemberCartSkuIdAPI,
+} from '@/services/cart'
 import { useMemberStore } from '@/stores'
 import type { CartItem } from '@/types/cart'
 import { onShow } from '@dcloudio/uni-app'
-import { ref } from 'vue'
-import Index from '../index/index.vue'
+import { computed, ref } from 'vue'
 //获取会员store
 const memberStore = useMemberStore()
 //获取购物车列表数据
@@ -40,6 +44,30 @@ const onDeleteCart = (skuId: string) => {
 const onChangeCount = (ev: InputNumberBoxEvent) => {
   putMemberCartSkuIdAPI(ev.index, { count: ev.value })
 }
+//修改选中状态 -- 单品修改
+const onChangeSelected = (item: CartItem) => {
+  // console.log(item)
+  //取反操作
+  item.selected = !item.selected
+  //后端数据更新
+  putMemberCartSkuIdAPI(item.skuId, { selected: item.selected })
+}
+
+//计算全选状态
+const isSelectedAll = computed(() => {
+  return cartList.value.length && cartList.value.every((v) => v.selected)
+})
+//修改选中状态 -- 全选修改
+const SelectedAll = () => {
+  //全选状态取反
+  const _isSelected = !isSelectedAll.value
+  //前端数据更新
+  cartList.value.forEach((item) => {
+    item.selected = _isSelected
+  })
+  //后端数据更新
+  putMemberCartSelectedAPI({ selected: _isSelected })
+}
 </script>
 
 <template>
@@ -60,7 +88,11 @@ const onChangeCount = (ev: InputNumberBoxEvent) => {
             <!-- 商品信息 -->
             <view class="goods">
               <!-- 选中状态 -->
-              <text class="checkbox" :class="{ checked: item.selected }"></text>
+              <text
+                @tap="onChangeSelected(item)"
+                class="checkbox"
+                :class="{ checked: item.selected }"
+              ></text>
               <navigator
                 :url="`/pages/goods/goods?id=${item.id}`"
                 hover-class="none"
@@ -107,7 +139,7 @@ const onChangeCount = (ev: InputNumberBoxEvent) => {
       </view>
       <!-- 吸底工具栏 -->
       <view class="toolbar">
-        <text class="all" :class="{ checked: true }">全选</text>
+        <text class="all" @tap="SelectedAll" :class="{ checked: isSelectedAll }">全选</text>
         <text class="text">合计:</text>
         <text class="amount">100</text>
         <view class="button-grounp">
