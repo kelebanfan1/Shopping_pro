@@ -33,7 +33,7 @@
 				"navigationBarTitleText": "购物车"
 			}
 		},
-    //商品详情点击购物车跳转的购物车，非Taber页，可以返回页面
+    //商品详情点击购物车跳转的购物车，非Tabar页，可以返回页面
     {
 			"path": "pages/cart/cartGood",
 			"style": {

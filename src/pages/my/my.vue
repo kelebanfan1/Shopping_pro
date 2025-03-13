@@ -1,5 +1,3 @@
-// src/pages/my/my.vue
-
 <script setup lang="ts">
 import { useGuessList } from '@/composables'
 import { useMemberStore } from '@/stores'
