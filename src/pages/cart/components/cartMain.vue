@@ -94,7 +94,7 @@ const goToPayment = () => {
     })
   }
   //跳转到结算页面
-  uni.showToast({ title: '结算' })
+  uni.navigateTo({ url: '/pagesOrder/create/create' })
 }
 //猜你喜欢触底刷新方法
 const { guessRef, onSrolltolower } = useGuessList()
