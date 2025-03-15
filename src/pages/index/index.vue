@@ -8,7 +8,6 @@ import { getHomeBannerAPI, getHomeCategoryAPI, getHomeHotAPI } from '@/services/
 import { onLoad } from '@dcloudio/uni-app'
 import { ref } from 'vue'
 import type { BannerItem, CategoryItem, HotItem } from '@/types/home'
-import type { XtxGuessInstance } from '@/types/component'
 import { useGuessList } from '@/composables'
 //获取轮播图数据
 const bannerList = ref<BannerItem[]>([])

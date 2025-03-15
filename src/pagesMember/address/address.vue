@@ -2,7 +2,7 @@
 import { deleteMemberAddressByIdAPI, getMemberAddressAPI } from '@/services/address'
 import { useAddressStore } from '@/stores/modules/address'
 import type { AddressItem } from '@/types/address'
-import { onLoad, onShow } from '@dcloudio/uni-app'
+import { onShow } from '@dcloudio/uni-app'
 import { ref } from 'vue'
 
 //获取收货地址列表
@@ -16,6 +16,7 @@ const getMemberAddressData = async () => {
 onShow(() => {
   getMemberAddressData()
 })
+
 //删除收货地址
 const onDeleteAddress = (id: string) => {
   uni.showModal({

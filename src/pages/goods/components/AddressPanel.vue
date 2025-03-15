@@ -1,5 +1,7 @@
 // AddressPanel.vue
 <script setup lang="ts">
+import type { AddressItem } from '@/types/address'
+
 //子调父
 const emit = defineEmits<{
   (event: 'close'): () => void
