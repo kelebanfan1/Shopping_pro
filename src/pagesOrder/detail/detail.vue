@@ -6,7 +6,12 @@ import type { OrderResult } from '@/types/order'
 import { onLoad, onReady } from '@dcloudio/uni-app'
 import { ref } from 'vue'
 import PageSkeleton from './components/PageSkeleton.vue'
-import { getMemberOrderConsignmentByIdAPI, getPayMockAPI, getPayWxPayMiniPay } from '@/services/pay'
+import {
+  getMemberOrderConsignmentByIdAPI,
+  getPayMockAPI,
+  getPayWxPayMiniPay,
+  putMemberOrderByIdReceiptAPI,
+} from '@/services/pay'
 
 // 获取屏幕边界到安全区域距离
 const { safeAreaInsets } = uni.getSystemInfoSync()
@@ -102,6 +107,7 @@ const onOrderPay = async () => {
 const isDev = import.meta.env.DEV
 //模拟发货
 const onOrderSend = async () => {
+  //仅在开发环境下使用，打包时自动删除以下代码 (tree shaking 树摇优化)
   if (isDev) {
     await getMemberOrderConsignmentByIdAPI(query.id)
     uni.showToast({
@@ -111,6 +117,20 @@ const onOrderSend = async () => {
     //主动更新订单状态
     order.value!.orderState = OrderState.DaiShouHuo
   }
+}
+//确认收货
+const onOrderConfirm = () => {
+  //二次弹窗
+  uni.showModal({
+    content: '为确保您的权益，请收到货并确认无误后，再确认收货',
+    success: async (success) => {
+      if (success.confirm) {
+        const res = await putMemberOrderByIdReceiptAPI(query.id)
+        //更新订单状态
+        order.value = res.result
+      }
+    },
+  })
 }
 </script>
 
@@ -169,6 +189,12 @@ const onOrderSend = async () => {
             >
               模拟发货
             </view>
+            <view
+              v-if="order.orderState === OrderState.DaiShouHuo"
+              @tap="onOrderConfirm"
+              class="button"
+              >确认收货</view
+            >
           </view>
         </template>
       </view>

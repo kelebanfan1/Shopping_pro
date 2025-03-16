@@ -1,3 +1,4 @@
+import type { OrderResult } from '@/types/order'
 import { http } from '@/utils/http'
 
 /* 获取微信支付参数
@@ -30,5 +31,16 @@ export const getMemberOrderConsignmentByIdAPI = (id: string) => {
   return http({
     method: 'GET',
     url: `/member/order/consignment/${id}`,
+  })
+}
+
+/* 确认收货
+开发中
+PUT
+/member/order/{id}/receipt */
+export const putMemberOrderByIdReceiptAPI = (id: string) => {
+  return http<OrderResult>({
+    method: 'PUT',
+    url: `/member/order/${id}/receipt`,
   })
 }
