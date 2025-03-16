@@ -21,3 +21,14 @@ export const getPayMockAPI = (data: { orderId: string }) => {
     data,
   })
 }
+
+/* 模拟发货-内测版
+开发中
+GET
+/member/order/consignment/{id} */
+export const getMemberOrderConsignmentByIdAPI = (id: string) => {
+  return http({
+    method: 'GET',
+    url: `/member/order/consignment/${id}`,
+  })
+}
