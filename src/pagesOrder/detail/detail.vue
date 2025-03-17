@@ -346,6 +346,7 @@ onLoad(() => {
             @tap="onOrderDelete"
             v-if="order.orderState >= OrderState.DaiPingJia"
           >
+            <!-- 枚举可直接使用 >= 实现  3 4 5状态 -->
             删除订单
           </view>
         </template>
