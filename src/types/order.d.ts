@@ -1,8 +1,31 @@
 import type { OrderState } from '@/services/constants'
 import type { AddressItem } from './address'
+import type { PageParams } from '@/types/global'
 
 /** 获取预付订单 返回信息 */
 export type OrderPreResult = {
+  items: {
+    id: string
+    orderState: OrderState
+    countdown: number
+    skus: {
+      id: string
+      spuId: string
+      name: string
+      attrsText: string
+      quantity: number
+      curPrice: number
+      image: string
+    }[]
+    receiverContact: string
+    receiverMobile: string
+    receiverAddress: string
+    createTime: string
+    totalMoney: number
+    postFee: number
+    payMoney: number
+    totalNum: number
+  }[]
   /** 商品集合 [ 商品信息 ] */
   goods: OrderPreGoods[]
   /** 结算信息 */
@@ -138,4 +161,27 @@ export type LogisticItem = {
   text: string
   /** 时间 */
   time: string
+}
+
+/** 订单列表参数 */
+export type OrderListParams = PageParams & { orderState: number }
+
+/** 订单列表 */
+export type OrderListResult = {
+  /** 总记录数 */
+  counts: number
+  /** 数据集合    [ 订单信息 ] */
+  items: OrderItem[]
+  /** 当前页码 */
+  page: number
+  /** 总页数 */
+  pages: number
+  /** 页尺寸 */
+  pageSize: number
+}
+
+/** 订单列表项 */
+export type OrderItem = OrderResult & {
+  /** 总件数 */
+  totalNum: number
 }
