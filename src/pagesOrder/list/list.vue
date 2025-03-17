@@ -11,12 +11,12 @@ const orderTabs = ref([
   { orderState: 3, title: '待收货' },
   { orderState: 4, title: '待评价' },
 ])
-//获取页面参数
+//获取页面参数 我的页面点击的订单状态
 const query = defineProps<{
   type: string
 }>()
 //高亮下标
-const activeIndex = ref(0)
+const activeIndex = ref(orderTabs.value.findIndex((v) => v.orderState === Number(query.type)))
 </script>
 
 <template>
