@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { OrderState, orderStateList } from '@/services/constants'
 import { getMemberOrderAPI } from '@/services/order'
+import { getPayMockAPI, getPayWxPayMiniPay } from '@/services/pay'
 import type { OrderItem, OrderListParams } from '@/types/order'
 import { onMounted, ref } from 'vue'
 
@@ -26,6 +27,23 @@ const getMemberOrderData = async () => {
 onMounted(() => {
   getMemberOrderData()
 })
+//订单支付
+const onOrderPay = async (id: string) => {
+  if (import.meta.env.DEV) {
+    //开发环境模拟支付
+    await getPayMockAPI({ orderId: id })
+  } else {
+    //正式环境下微信支付
+    const res = await getPayWxPayMiniPay({ orderId: id })
+    // console.log(res)
+    wx.requestPayment(res.result)
+  }
+  //成功提示
+  uni.showToast({ title: '支付成功' })
+  //更新订单状态
+  const order = orderList.value.find((v) => v.id === id)
+  order!.orderState = OrderState.DaiFaHuo
+}
 </script>
 <template>
   <!-- 订单列表 -->
@@ -65,7 +83,7 @@ onMounted(() => {
       <view class="action">
         <!-- 待付款状态：显示去支付按钮 -->
         <template v-if="item.orderState === OrderState.DaiFuKuan">
-          <view class="button primary">去支付</view>
+          <view class="button primary" @tap="onOrderPay(item.id)">去支付</view>
         </template>
         <template v-else>
           <navigator
