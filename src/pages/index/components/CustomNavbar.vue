@@ -8,8 +8,8 @@ console.log(safeAreaInsets)
   <view class="navbar" :style="{ paddingTop: safeAreaInsets?.top + 'px' }">
     <!-- logo文字 -->
     <view class="logo">
-      <image class="logo-image" src="@/static/images/logo.png"></image>
-      <text class="logo-text">新鲜 · 亲民 · 快捷</text>
+	  <text class="logoLite">快购Lite</text>
+      <text class="logo-text">极速·轻量·省心</text>
     </view>
     <!-- 搜索条 -->
     <view class="search">
@@ -27,17 +27,19 @@ console.log(safeAreaInsets)
   position: relative;
   display: flex;
   flex-direction: column;
-  padding-top: 20px;
+  padding-top: 18px;
   .logo {
     display: flex;
     align-items: center;
     height: 64rpx;
     padding-left: 30rpx;
     padding-top: 20rpx;
-    .logo-image {
-      width: 166rpx;
-      height: 39rpx;
-    }
+    .logoLite{
+		color: #fff;
+		font-size: 20px;
+		font-weight: bold;
+		letter-spacing: 1.2px;
+	}
     .logo-text {
       flex: 1;
       line-height: 28rpx;
@@ -46,6 +48,7 @@ console.log(safeAreaInsets)
       padding-left: 20rpx;
       border-left: 1rpx solid #fff;
       font-size: 26rpx;
+	  letter-spacing: 2px;
     }
   }
   .search {

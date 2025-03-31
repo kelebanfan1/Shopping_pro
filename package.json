@@ -1,10 +1,6 @@
 {
   "name": "uni-app-xiaotuxian",
   "version": "0.0.0",
-  "author": {
-    "name": "itheima",
-    "url": "https://web.itheima.com/"
-  },
   "scripts": {
     "dev:app": "uni -p app",
     "dev:app-android": "uni -p app-android",
